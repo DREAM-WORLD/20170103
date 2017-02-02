@@ -37,7 +37,7 @@
         
         for (UNNotificationRequest *request in requests) {
             
-//            [[UNUserNotificationCenter currentNotificationCenter] removePendingNotificationRequestsWithIdentifiers:@[request.identifier]];
+            // [[UNUserNotificationCenter currentNotificationCenter] removePendingNotificationRequestsWithIdentifiers:@[request.identifier]]; // 删除所有通知
             
             if ([request.identifier isEqualToString: [NSString stringWithFormat:@"%ld", self.identifier]]) {
                 self.button.selected = YES;
@@ -73,6 +73,7 @@
             if ([request.identifier isEqualToString:[NSString stringWithFormat:@"%ld",self.identifier]]) {
                 
                 [[UNUserNotificationCenter currentNotificationCenter] removePendingNotificationRequestsWithIdentifiers:@[[NSString stringWithFormat:@"%ld",self.identifier]]];
+                
                 [ZAlert showAlertWithMessage:@"移除成功" block:nil];
             }
         }

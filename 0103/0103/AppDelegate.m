@@ -42,19 +42,19 @@
     NSLog(@"前台");
     completionHandler(UNNotificationPresentationOptionBadge + UNNotificationPresentationOptionSound + UNNotificationPresentationOptionAlert);
     
-    [self notifiAlertWithNotificationRequest:notification.request];
+    [self alertWithNotifyRequest:notification.request];
 }
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)())completionHandler {
     NSLog(@"后台");
     completionHandler();
     
-    [self notifiAlertWithNotificationRequest:response.notification.request];
+    [self alertWithNotifyRequest:response.notification.request];
 }
 
-- (void)notifiAlertWithNotificationRequest:(UNNotificationRequest *)notificationRequest {
+- (void)alertWithNotifyRequest:(UNNotificationRequest *)notifyRequest {
     
-     NSString *str = [NSString stringWithFormat:@"%@, %@", notificationRequest.content.title, notificationRequest.content.body];
+     NSString *str = [NSString stringWithFormat:@"%@, %@", notifyRequest.content.title, notifyRequest.content.body];
     
     [ZAlert showAlertWithMessage:str block:^{
         NSLog(@"确定");
@@ -85,7 +85,7 @@
     [[UNUserNotificationCenter currentNotificationCenter] getDeliveredNotificationsWithCompletionHandler:^(NSArray<UNNotification *> * _Nonnull notifications) {
        
         if (notifications.count != 0) {
-            [self notifiAlertWithNotificationRequest:notifications.firstObject.request];
+            [self alertWithNotifyRequest:notifications.firstObject.request];
         }
     }];
 }
